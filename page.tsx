@@ -117,7 +117,7 @@ export default function LandingPage() {
           {/* Footer */}
           <div className="col-span-4 border border-green-400/20 p-4 bg-black/30 backdrop-blur-sm">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="text-sm text-green-400/40">© 2024 Disequi LLC. All rights reserved.</div>
+              <div className="text-sm text-green-400/40">© 2025 Disequi LLC. All rights reserved.</div>
               <div className="flex space-x-6">
                 <Link href="/privacy" className="text-sm text-green-400/40 hover:text-green-400 transition-colors">
                   Privacy

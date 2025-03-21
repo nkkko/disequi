@@ -7,7 +7,7 @@ import Link from "next/link"
 import { ArrowRight, Mail, Phone, MapPin } from "lucide-react"
 import { GradientBackground } from "../components/gradient-background"
 import { MobileMenu } from "../components/mobile-menu"
-import { NewsletterSubscription } from "../components/newsletter-subscription"
+import { Footer } from "../components/footer"
 import { motion } from "framer-motion"
 import { AnimatedHero, fadeUpVariants } from "../components/animated-hero"
 
@@ -170,7 +170,7 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6 mr-4 mt-1" />
                 <div>
                   <h3 className="font-bold mb-1">Phone</h3>
-                  <p className="text-green-400/80">+1 (555) 123-4567</p>
+                  <p className="text-green-400/80">+385 98 500 161</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -178,11 +178,22 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-bold mb-1">Address</h3>
                   <p className="text-green-400/80">
-                    123 Innovation Street
+                    R. Boskovica 27
                     <br />
-                    Tech City, TC 12345
+                    21000 Split, Croatia
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="w-6 h-6 mr-4 mt-1 flex items-center justify-center">
+                  <span className="text-green-400 text-xs font-mono">ID</span>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">Company Information</h3>
+                  <p className="text-green-400/80">
+                    OIB: 55950527428
                     <br />
-                    United States
+                    MBS: 060484565
                   </p>
                 </div>
               </div>
@@ -190,30 +201,7 @@ export default function ContactPage() {
           </div>
 
           {/* Footer */}
-          <div className="col-span-4 border border-green-400/20 p-8 bg-black/30 backdrop-blur-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <div className="text-2xl font-bold tracking-wider font-mono mb-4">
-                  DISEQUI<span className="text-xs ml-1 opacity-60">LLC</span>
-                </div>
-                <p className="text-sm text-green-400/80 mb-4">
-                  Transforming ideas into successful ventures through innovative strategies and balanced growth.
-                </p>
-                <div className="text-sm text-green-400/40">© 2024 Disequi LLC. All rights reserved.</div>
-              </div>
-              <div>
-                <NewsletterSubscription />
-              </div>
-            </div>
-            <div className="mt-8 pt-8 border-t border-green-400/20 flex justify-center space-x-6">
-              <Link href="/privacy" className="text-sm text-green-400/40 hover:text-green-400 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-sm text-green-400/40 hover:text-green-400 transition-colors">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
     </div>

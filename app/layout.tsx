@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-    generator: 'v0.dev'
+  keywords: "innovation, business transformation, digital strategy, technology consulting, Split, Croatia",
+  authors: [{ name: "Disequi LLC", url: "https://disequi.com" }],
+  generator: 'v0.dev',
+  metadataBase: new URL("https://disequi.com")
 }
 
 export default function RootLayout({
@@ -32,7 +35,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'

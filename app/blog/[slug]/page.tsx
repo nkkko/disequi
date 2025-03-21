@@ -2,6 +2,7 @@ import Link from "next/link"
 import { GradientBackground } from "../../components/gradient-background"
 import { MobileMenu } from "../../components/mobile-menu"
 import { NewsletterSubscription } from "../../components/newsletter-subscription"
+import { Footer } from "../../components/footer"
 import { DynamicThumbnail } from "../../components/dynamic-thumbnail"
 import { ArrowLeft, CalendarIcon, Clock, User } from "lucide-react"
 import { getAllPostSlugs, getPostData, getSortedPostsData } from "@/lib/blog"
@@ -140,19 +141,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             </div>
 
             {/* Footer */}
-            <div className="col-span-4 border border-green-400/20 p-4 bg-black/30 backdrop-blur-sm">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="text-sm text-green-400/40">© 2024 Disequi LLC. All rights reserved.</div>
-                <div className="flex space-x-6">
-                  <Link href="/privacy" className="text-sm text-green-400/40 hover:text-green-400 transition-colors">
-                    Privacy Policy
-                  </Link>
-                  <Link href="/terms" className="text-sm text-green-400/40 hover:text-green-400 transition-colors">
-                    Terms of Service
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <Footer />
           </div>
         </div>
       </div>

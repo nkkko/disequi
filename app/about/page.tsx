@@ -178,7 +178,7 @@ export default function AboutPage() {
                 <p className="text-sm text-green-400/80 mb-4">
                   Transforming ideas into successful ventures through innovative strategies and balanced growth.
                 </p>
-                <div className="text-sm text-green-400/40">© 2024 Disequi LLC. All rights reserved.</div>
+                <div className="text-sm text-green-400/40">© 2025 Disequi LLC. All rights reserved.</div>
               </div>
               <div>
                 <NewsletterSubscription />
