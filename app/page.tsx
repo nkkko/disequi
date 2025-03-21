@@ -5,8 +5,8 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { GradientBackground } from "./components/gradient-background"
-import { MobileMenu } from "./components/mobile-menu"
 import { AnimatedHero, fadeUpVariants } from "./components/animated-hero"
+import { Header } from "./components/header"
 import { useInView } from "react-intersection-observer"
 import { ErrorBoundary } from "./components/error-boundary"
 import { SuppressConsoleErrors } from "./components/suppress-console-errors"
@@ -18,38 +18,7 @@ const WaveVisualization = lazy(() =>
 )
 const SyncWaves = lazy(() => import("./components/sync-waves").then((mod) => ({ default: mod.SyncWaves })))
 
-// Memoize sections to prevent unnecessary re-renders
-const MemoizedHeader = memo(function Header() {
-  return (
-    <div className="col-span-4 border border-green-400/20 bg-black/30 backdrop-blur-sm relative z-40">
-      <div className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold tracking-wider font-mono">
-            DISEQUI<span className="text-xs ml-1 opacity-60">LLC</span>
-          </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/about" className="text-green-400/60 hover:text-green-400 transition-colors">
-              About
-            </Link>
-            <Link href="/services" className="text-green-400/60 hover:text-green-400 transition-colors">
-              Services
-            </Link>
-            <Link href="/process" className="text-green-400/60 hover:text-green-400 transition-colors">
-              Process
-            </Link>
-            <Link href="/blog" className="text-green-400/60 hover:text-green-400 transition-colors">
-              Blog
-            </Link>
-            <Link href="/contact" className="text-green-400/60 hover:text-green-400 transition-colors">
-              Contact
-            </Link>
-          </nav>
-          <MobileMenu />
-        </div>
-      </div>
-    </div>
-  )
-})
+// Header is now imported at the top of the file
 
 // Use our shared Footer component instead
 
@@ -78,7 +47,7 @@ export default function LandingPage() {
 
       <div className="container mx-auto px-4 py-8 relative">
         <div className="grid grid-cols-4 gap-4">
-          <MemoizedHeader />
+          <Header />
 
           {/* Hero Section */}
           <div className="col-span-4 border border-green-400/20 bg-black/30 backdrop-blur-sm relative overflow-hidden">

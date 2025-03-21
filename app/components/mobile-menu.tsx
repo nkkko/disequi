@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { NavigationLinks } from "./navigation-links"
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
+  
+  const handleLinkClick = () => setIsOpen(false)
 
   return (
     <div className="md:hidden">
@@ -23,48 +25,7 @@ export function MobileMenu() {
         } overflow-hidden`}
       >
         <nav className="flex flex-col p-4">
-          <Link
-            href="/"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            href="/services"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Services
-          </Link>
-          <Link
-            href="/process"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Process
-          </Link>
-          <Link
-            href="/blog"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Blog
-          </Link>
-          <Link
-            href="/contact"
-            className="text-green-400 hover:text-green-300 transition-colors py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Contact
-          </Link>
+          <NavigationLinks onClick={handleLinkClick} vertical={true} />
         </nav>
       </div>
     </div>
