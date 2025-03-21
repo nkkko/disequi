@@ -47,16 +47,6 @@ export default function AboutPage() {
             role="Founder & CEO"
             bio="With extensive experience in business transformation, Nikola leads our team with vision and expertise."
           />
-          <TeamMember
-            name="John Smith"
-            role="Chief Strategy Officer"
-            bio="John's innovative approach to strategy development has helped numerous clients achieve breakthrough results."
-          />
-          <TeamMember
-            name="Emily Chen"
-            role="Head of Innovation"
-            bio="Emily's passion for emerging technologies drives our cutting-edge solutions and keeps our clients ahead of the curve."
-          />
         </div>
       </ContentSection>
 
@@ -85,8 +75,8 @@ export default function AboutPage() {
       </ContentSection>
 
       {/* CTA Section */}
-      <CtaSection 
-        title="Ready to Transform Your Business?" 
+      <CtaSection
+        title="Ready to Transform Your Business?"
         description="Let's work together to achieve your goals and drive sustainable growth."
       />
     </PageLayout>

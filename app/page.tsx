@@ -13,9 +13,6 @@ import { SuppressConsoleErrors } from "./components/suppress-console-errors"
 import { Footer } from "./components/footer"
 
 // Lazy load heavy components
-const AnimatedTerminal = lazy(() =>
-  import("./components/animated-terminal").then((mod) => ({ default: mod.AnimatedTerminal })),
-)
 const WaveVisualization = lazy(() =>
   import("./components/wave-visualization").then((mod) => ({ default: mod.WaveVisualization })),
 )
@@ -86,8 +83,8 @@ export default function LandingPage() {
           {/* Hero Section */}
           <div className="col-span-4 border border-green-400/20 bg-black/30 backdrop-blur-sm relative overflow-hidden">
             <AnimatedHero>
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 h-[calc(100vh-200px)] p-8">
-                <div className="w-full md:w-1/2 flex flex-col justify-center">
+              <div className="relative z-10 flex flex-col md:flex-row gap-8 h-[calc(70vh-140px)] p-8">
+                <div className="w-full flex flex-col justify-center">
                   <motion.h1
                     custom={0}
                     variants={fadeUpVariants}
@@ -128,19 +125,6 @@ export default function LandingPage() {
                       View Our Process
                     </Link>
                   </motion.div>
-                </div>
-                <div className="hidden md:block md:w-1/2 h-full">
-                  <ErrorBoundary
-                    fallback={
-                      <div className="h-full flex items-center justify-center text-green-400/60">
-                        Terminal unavailable
-                      </div>
-                    }
-                  >
-                    <Suspense fallback={<LoadingFallback />}>
-                      <AnimatedTerminal />
-                    </Suspense>
-                  </ErrorBoundary>
                 </div>
               </div>
             </AnimatedHero>
