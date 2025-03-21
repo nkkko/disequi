@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 142 84% 45%;
+}
+
+body {
+  background-color: transparent;
+  color: hsl(var(--foreground));
+  min-height: 100vh;
+}
+
+/* Remove default rounded corners */
+* {
+  border-radius: 0 !important;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(74, 222, 128, 0.2);
+  color: rgb(74, 222, 128);
+}
+
