@@ -1,10 +1,19 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import { remark } from "remark"
-import html from "remark-html"
+import { serialize } from "next-mdx-remote/serialize"
+import rehypeHighlight from "rehype-highlight"
+import rehypeSlug from "rehype-slug"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import remarkGfm from "remark-gfm"
 
 const postsDirectory = path.join(process.cwd(), "content/blog")
+
+export interface TableOfContents {
+  level: number
+  text: string
+  slug: string
+}
 
 export interface BlogPost {
   slug: string
@@ -14,17 +23,18 @@ export interface BlogPost {
   excerpt: string
   thumbnailSeed: number
   readTime: string
-  content: string
+  content: any // This will hold the serialized MDX content
+  toc?: TableOfContents[]
 }
 
-export function getSortedPostsData(): Omit<BlogPost, "content">[] {
+export function getSortedPostsData(): Omit<BlogPost, "content" | "toc">[] {
   // Get file names under /content/blog
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
+    .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
     .map((fileName) => {
-      // Remove ".md" from file name to get slug
-      const slug = fileName.replace(/\.md$/, "")
+      // Remove ".md" or ".mdx" from file name to get slug
+      const slug = fileName.replace(/\.(md|mdx)$/, "")
 
       // Read markdown file as string
       const fullPath = path.join(postsDirectory, fileName)
@@ -79,25 +89,71 @@ export function getSortedPostsData(): Omit<BlogPost, "content">[] {
 
 export function getAllPostSlugs() {
   const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        slug: fileName.replace(/\.md$/, ""),
-      },
-    }
-  })
+  return fileNames
+    .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
+    .map((fileName) => {
+      return {
+        params: {
+          slug: fileName.replace(/\.(md|mdx)$/, ""),
+        },
+      }
+    })
+}
+
+// Function to extract headings from markdown content
+function extractHeadings(content: string): TableOfContents[] {
+  const toc: TableOfContents[] = []
+  const headingRegex = /^(#{1,6})\s+(.+)$/gm
+  let match
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length
+    const text = match[2].trim()
+    const slug = text.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "")
+
+    toc.push({
+      level,
+      text,
+      slug,
+    })
+  }
+
+  return toc
 }
 
 export async function getPostData(slug: string): Promise<BlogPost> {
   const fullPath = path.join(postsDirectory, `${slug}.md`)
-  const fileContents = fs.readFileSync(fullPath, "utf8")
+  const mdxPath = path.join(postsDirectory, `${slug}.mdx`)
+  
+  let filePath = ""
+  if (fs.existsSync(fullPath)) {
+    filePath = fullPath
+  } else if (fs.existsSync(mdxPath)) {
+    filePath = mdxPath
+  } else {
+    throw new Error(`No .md or .mdx file found for slug: ${slug}`)
+  }
+  
+  const fileContents = fs.readFileSync(filePath, "utf8")
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents)
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark().use(html).process(matterResult.content)
-  const content = processedContent.toString()
+  // Extract table of contents
+  const toc = extractHeadings(matterResult.content)
+
+  // Serialize MDX content with plugins
+  const mdxSource = await serialize(matterResult.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: "wrap" }],
+        rehypeHighlight,
+      ],
+    },
+    scope: matterResult.data,
+  })
 
   // Ensure the frontmatter has all required fields
   const data = matterResult.data as {
@@ -129,8 +185,8 @@ export async function getPostData(slug: string): Promise<BlogPost> {
   // Combine the data with the id and contentHtml
   return {
     slug,
-    content,
+    content: mdxSource,
+    toc,
     ...data,
   }
 }
-
