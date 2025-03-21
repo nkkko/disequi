@@ -19,8 +19,8 @@ export function PageLayout({ children, className = "" }: PageLayoutProps) {
         <div className="grid grid-cols-4 gap-4">
           <Header />
           
-          {/* Main content */}
-          <div className={className}>
+          {/* Main content - full width by default */}
+          <div className={`col-span-4 grid grid-cols-4 gap-4 ${className}`}>
             {children}
           </div>
           

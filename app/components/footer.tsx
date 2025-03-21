@@ -15,7 +15,7 @@ export function Footer() {
             Transforming ideas into successful ventures through innovative strategies and balanced growth.
           </p>
           <div className="text-sm text-green-400/40">
-            © {new Date().getFullYear()} Disequi LLC. All rights reserved. OIB: 55950527428 | MBS: 060484565
+            © {new Date().getFullYear()} Disequi LLC. All rights reserved.
           </div>
         </div>
         <div>
